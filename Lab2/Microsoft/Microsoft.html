@@ -1,0 +1,122 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Microsoft</title>
+        <style>
+            .button{
+                position: relative;
+                left: 10px;
+                border: none;
+                background-color: white;
+                height: 40px;
+                width: 100px;
+                font-size: 20px;
+            }
+            .button:hover{
+                border: 0px;
+                background-color: rgb(222, 222, 222);
+            }
+
+            ul{
+                list-style: none;
+                display: block;
+                margin: 0px;
+                padding: 0px;
+            }
+            ul:after{
+                display: block;
+                float: none;
+                content: ' ';
+                clear: both;
+            }
+            ul.mmenuu>li{
+                float: left;
+                position: relative;
+                top: -40px;
+                left: 1200px;
+                font-size: 16px;
+            }
+            ul.mmenuu>li>a{
+                display: block;
+                color:black;
+                padding: 10px;
+                text-decoration: none;
+                background-color: white;
+            }
+            ul.mmenuu>li>a:hover{
+                background-color: rgb(222, 222, 222);
+            }
+            ul.ssubmenuu {
+                position: absolute;
+                width: 240px;
+                top: 37px;
+                left:0px;
+                display: none;
+                background-color: white;
+            }
+            ul.ssubmenuu > li {
+                display: block;
+            }
+            ul.ssubmenuu > li > a {
+                display: block;
+                text-decoration: none;
+                padding: 10px;
+                background-color: white;
+                color: black;
+            }
+            ul.ssubmenuu > li > a:hover {
+                background-color: rgb(222, 222, 222);
+                text-decoration: none;
+            }
+            ul.mmenuu > li:hover > ul.ssubmenuu {
+                display: block;
+            }
+        </style>
+    </head>
+    <body>
+        <img src="MicrosoftLogo.png" style="position:relative; top:4px;left:10px; width:20px"><button class="button" type="submit">Microsoft</button>
+        <button class="button" type="submit" style="width: 120px; font-size:16px ;">Microsoft 365</button>
+        <button class="button" type="submit" style="width: 80px; font-size:16px ;">Office</button>
+        <button class="button" type="submit" style="width: 100px; font-size:16px ;">Windows</button>
+        <button class="button" type="submit" style="width: 110px; font-size:16px ;">Поддержка</button>
+        <ul class="mmenuu">
+            <li><a href=#>Продукты Майкрософт</a>
+                <ul class="ssubmenuu">
+                    <li><a href=#>Продукт 1</a></li>
+                    <li><a href=#>Продукт 2</a></li>
+                    <li><a href=#>Продукт 3</a></li>
+                </ul>
+            </li>
+        </ul>
+        <button class="button" type="submit" style="width:40px; top:-80px; left:1370px"><img src="Search.png" width="30px"></button>
+        <button class="button" type="submit" style="width:40px; top:-80px; left:1370px"><img src="ProfilePlus.png" width="30px"></button>
+        <img src="WindowsBG1.jpg" width="1440px" style="position:relative; top:-50px; left:10px;">
+        <div>
+            <img src="WindowsBG.jpg" width="300px" style="position:relative;left:10px;">
+            <h3 style="position:relative;left:10px;">Microsoft</h3>
+            <h4 style="position:relative;left:10px; width:300px;">Чтобы увидеть больше новостей пройдите по ссылке</h4>
+            <a href="Microsoft.html" style="position:relative;left:10px; color: blue;">Подробнее ></a>
+        </div>
+        <div style="position:relative; left:370px; top:-315px;">
+            <img src="WindowsBG.jpg" width="300px" style="position:relative;left:10px;">
+            <h3 style="position:relative;left:10px;">Again Microsoft</h3>
+            <h4 style="position:relative;left:10px; width:300px;">Чтобы увидеть больше новостей пройдите по ссылке</h4>
+            <a href="Microsoft.html" style="position:relative;left:10px; color: blue;">Подробнее ></a>
+        </div>
+        <div style="position:relative; left:740px; top:-630px;">
+            <img src="WindowsBG.jpg" width="300px" style="position:relative;left:10px;">
+            <h3 style="position:relative;left:10px;">Third time Microsoft</h3>
+            <h4 style="position:relative;left:10px; width:300px;">Чтобы увидеть больше новостей пройдите по ссылке</h4>
+            <a href="Microsoft.html" style="position:relative;left:10px; color: blue;">Подробнее ></a>
+        </div>
+        <div style="position:relative; left:1110px; top:-945px;">
+            <img src="WindowsBG.jpg" width="300px" style="position:relative;left:10px;">
+            <h3 style="position:relative;left:10px;">OMG,what is going on?</h3>
+            <h4 style="position:relative;left:10px; width:300px;">Чтобы увидеть больше новостей пройдите по ссылке</h4>
+            <a href="Microsoft.html" style="position:relative;left:10px; color: blue;">Подробнее ></a>
+        </div>
+    </body>
+</html>
