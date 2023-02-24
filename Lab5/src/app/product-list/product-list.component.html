@@ -1,0 +1,25 @@
+<h2>Products</h2>
+
+<div *ngFor="let product of products">
+  <h3>
+    <img src="{{ product.img }}" width="100px" />
+    <a class="name" [title]="product.name" (click)="goToSite(product.url)">
+      {{ product.name }}
+    </a>
+  </h3>
+
+  <p class="info" *ngIf="product.description">
+    Description: {{ product.description }}
+  </p>
+
+  <button class="buttonW" type="button" (click)="shareWhatsApp(product.url)">
+    Share WhatsApp
+  </button>
+  <button
+    class="buttonT"
+    type="button"
+    (click)="shareTelegram(product.url, product.name)"
+  >
+    Share Telegram
+  </button>
+</div>
