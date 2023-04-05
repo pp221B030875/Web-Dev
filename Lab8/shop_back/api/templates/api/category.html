@@ -1,0 +1,12 @@
+{% extends 'api/base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ Category }}</h1>
+    <div class="alert alert-warning mt-2">
+           <a href="/categories/{{ category.id}}/products"><h3>{{ category.name }}</h3></a>
+        </div>
+{% endblock %}

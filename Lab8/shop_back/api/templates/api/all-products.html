@@ -1,0 +1,18 @@
+{% extends 'api/base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    {% for product in AllProducts %}
+        <div class="alert alert-warning mt-2">
+            <h3>{{ product.name }}</h3>
+            <p>{{ product.description }}</p>
+            <p>Price: {{ product.price }}</p>
+            <p>Count: {{ product.count }}</p>
+            <p>Available:{{ product.is_active }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
