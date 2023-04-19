@@ -1,0 +1,17 @@
+{% extends 'api/base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <div class="alert alert-warning mt-2">
+            <h3>{{ vacancy.name }}</h3>
+            <p>{{ vacancy.description }}</p>
+            <p>{{ vacancy.salary }}</p>
+            <a href="/api/companies/{{ vacancy.company.id}}"><p>{{ vacancy.company.name }}</p></a>
+            <a href="/api/update/{{vacancy.id}}?type=vacancy"><p>Update vacancy</p></a>
+            <a href="/api/delete/{{vacancy.id}}?type=vacancy"><p>Delete vacancy</p></a>
+        </div>
+{% endblock %}

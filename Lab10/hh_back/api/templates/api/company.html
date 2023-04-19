@@ -1,0 +1,17 @@
+{% extends 'api/base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <div class="alert alert-warning mt-2">
+        <p>{{ company.description }}</p>
+        <p>{{ company.city }}</p>
+        <p>{{ company.address }}</p>
+       <a href="{{ company.id}}/vacancies"><h3>Show all vacancies</h3></a>
+        <a href="/api/update/{{company.id}}?type=company"><p>Update company</p></a>
+        <a href="/api/delete/{{company.id}}?type=company"><p>Delete company</p></a>
+    </div>
+{% endblock %}

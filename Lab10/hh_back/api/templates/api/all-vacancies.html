@@ -1,0 +1,15 @@
+{% extends 'api/base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    {% for vacancy in AllVacancies %}
+        <div class="alert alert-warning mt-2">
+            <a href="/api/vacancies/{{ vacancy.id }}"><h3>{{ vacancy.name }}</h3></a>
+            <p>{{ vacancy.salary }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
