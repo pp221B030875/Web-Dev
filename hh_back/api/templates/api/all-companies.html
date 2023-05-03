@@ -1,0 +1,14 @@
+{% extends 'api/base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1>All Companies</h1>
+    {% for company in Companies %}
+        <div class="alert alert-warning mt-2">
+            <a href="companies/{{ company.id}}"><h3>{{ company.name }}</h3></a>
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -7,7 +7,7 @@ class VacancySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class CompanySerializer(serializers.ModelSerializer):
+class CompanySerializer(serializers.Serializer):
     class Meta:
         model = Company
         fields = '__all__'

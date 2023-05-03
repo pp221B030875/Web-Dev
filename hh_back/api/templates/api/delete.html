@@ -1,0 +1,15 @@
+{% extends 'api/base.html' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <form method = "post">
+      {% csrf_token %}
+      <h3>Подтвердите удаление</h3>
+      <input type = "submit" value="Да">
+      <a href="/">Нет</a>
+    </form>
+{% endblock %}
