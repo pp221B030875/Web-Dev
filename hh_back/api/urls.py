@@ -13,6 +13,7 @@ urlpatterns = [
     #Vacancy views
     path('api/vacancies', views.AllVacanciesClass.as_view(), name='all-vacancies'),
     path('api/vacancies/<int:id>', views.VacancyDetail),
+    path('api/categories/<int:id>', views.VacanciesByCategory),
     #Top 10 vacancies
     path('api/vacancies/top_ten', views.ShowTopTenVacancies, name='top-ten-vacancies'),
     #UserView
@@ -20,9 +21,8 @@ urlpatterns = [
     #Manager
     path('api/all-employees', views.ShowAllEmployees),
     path('api/categories', views.AllCategoriesClass.as_view()),
-    path('api/categories/<int:id>', views.AllVacanciesClass.as_view()),
 
     path('api/create', views.CreateObject),
-    path('api/update', views.UpdateObject),
-    path('api/delete', views.DeleteObject),
+    path('api/update/<int:id>', views.UpdateObject),
+    path('api/delete/<int:id>', views.DeleteObject),
 ]

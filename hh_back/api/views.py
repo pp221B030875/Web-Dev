@@ -23,14 +23,9 @@ class AllVacanciesClass(APIView):
             # api/vacancies
             if id == 0:
                 vacancies = Vacancy.objects.all()
-
-            # api/vacancies?type=company
-            elif str(request.GET.get('type')) == 'company':
+            #api/companies/1/vacancies
+            else:
                 vacancies = Vacancy.objects.filter(company=id)
-
-            # api/vacancies?type=category
-            elif str(request.GET.get('type')) == 'category':
-                vacancies = Vacancy.objects.filter(category=id)
 
             serializer = VacancySerializer(vacancies, many=True)
             return Response(serializer.data)
@@ -63,6 +58,15 @@ def VacancyDetail(request,id):
         vacancy.delete()
         response = 'Vacancy was succesesfully deleted!'
         return Response(response)
+
+@api_view(['GET'])
+def VacanciesByCategory(request,id):
+    try:
+        vacancies = Vacancy.objects.filter(category=id)
+        serializer = VacancySerializer(vacancies, many=True)
+        return Response(serializer.data)
+    except Vacancy.DoesNotExist:
+        raise Http404
 
 
 #Company views ==================================================================================
@@ -218,27 +222,6 @@ class AllCategoriesClass(APIView):
             return Response(serializer.data)
         return Response(serializer.errors, status=400)
 
-@api_view(['GET','PUT','DELETE'])
-def CategoryDetail(request,id):
-    try:
-        category = Category.objects.get(id = id)
-    except Category.DoesNotExist:
-        raise Http404
-
-    if request.method == 'GET':
-        serializer = CategorySerializer(category, many=False)
-        return Response(serializer.data)
-    elif request.method == 'PUT':
-        serializer = CategorySerializer(instance=category,data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors,status=400)
-    elif request.method == 'DELETE':
-        category.delete()
-        response = 'Category was succesesfully deleted!'
-        return Response(response)
-
 
 #CRUD
 def CreateObject(request):
@@ -302,7 +285,7 @@ def UpdateObject(request,id):
             form = CategoryForm(request.POST, instance=old_data)
             if form.is_valid():
                 form.save()
-                return redirect(f'/api/vacancies/{id}?type=category')
+                return redirect(f'/api/categories/{id}')
 
     else:
         if str(request.GET.get('type')) == 'vacancy':
