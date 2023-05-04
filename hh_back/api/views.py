@@ -28,7 +28,7 @@ class AllVacanciesClass(APIView):
             elif str(request.GET.get('type')) == 'company':
                 vacancies = Vacancy.objects.filter(company=id)
 
-                # api/vacancies?type=category
+            # api/vacancies?type=category
             elif str(request.GET.get('type')) == 'category':
                 vacancies = Vacancy.objects.filter(category=id)
 
@@ -76,7 +76,6 @@ class AllCompaniesClass(APIView):
         except Company.DoesNotExist:
             raise Http404
     def post(self,request):
-
         serializer = CompanySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -116,7 +115,7 @@ class Register(APIView):
     permission_classes = (AllowAny,)
     def get(self,request):
         form = CustomUserForm()
-        context = {'form': form, 'title': 'Welcome to HH!'}
+        context = {'form': form, 'title': 'Sign up to HustleUP!'}
         return render(request, 'api/create.html', context)
 
     def post(self,request):
@@ -204,6 +203,21 @@ def ShowAllEmployees(request):
     serializer = CustomUserSerializer(employees, many=True)
     return Response(serializer.data)
 
+class AllCategoriesClass(APIView):
+    def get(self,request):
+        try:
+            categories = Category.objects.all()
+            serializer = CategorySerializer(categories, many=True)
+            return Response(serializer.data)
+        except Vacancy.DoesNotExist:
+            raise Http404
+    def post(self,request):
+        serializer = CategorySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+
 @api_view(['GET','PUT','DELETE'])
 def CategoryDetail(request,id):
     try:
@@ -239,6 +253,11 @@ def CreateObject(request):
             if form.is_valid():
                 form.save()
                 return redirect('/api/companies')
+        elif str(request.GET.get('type')) == 'category':
+            form = CategoryForm(request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('/api/categories')
     else:
         if (request.GET.get('type') == 'vacancy'):
             form = VacancyForm()
@@ -246,6 +265,9 @@ def CreateObject(request):
         elif (request.GET.get('type') == 'company'):
             form = CompanyForm()
             context = {'form': form,'title': 'Create new company'}
+        elif (request.GET.get('type') == 'category'):
+            form = CategoryForm()
+            context = {'form': form,'title': 'Create new category'}
         return render(request, 'api/create.html', context)
 
 def UpdateObject(request,id):
@@ -259,6 +281,11 @@ def UpdateObject(request,id):
             old_data = get_object_or_404(Company,id = id)
         except:
             raise Http404('No such company')
+    elif str(request.GET.get('type')) == 'category':
+        try:
+            old_data = get_object_or_404(Category,id = id)
+        except:
+            raise Http404('No such category')
 
     if(request.method == "POST"):
         if str(request.GET.get('type')) == 'vacancy':
@@ -271,6 +298,11 @@ def UpdateObject(request,id):
             if form.is_valid():
                 form.save()
                 return redirect(f'/api/companies/{id}')
+        elif str(request.GET.get('type')) == 'category':
+            form = CategoryForm(request.POST, instance=old_data)
+            if form.is_valid():
+                form.save()
+                return redirect(f'/api/vacancies/{id}?type=category')
 
     else:
         if str(request.GET.get('type')) == 'vacancy':
@@ -279,6 +311,9 @@ def UpdateObject(request,id):
         elif str(request.GET.get('type')) == 'company':
             form = CompanyForm(instance=old_data)
             context = {'form': form, 'title':'Update company: ' + old_data.name }
+        elif str(request.GET.get('type')) == 'category':
+            form = CategoryForm(instance=old_data)
+            context = {'form': form, 'title':'Update category: ' + old_data.name }
 
         return render(request,'api/update.html',context)
 
@@ -293,6 +328,11 @@ def DeleteObject(request,id):
             data = get_object_or_404(Company,id = id)
         except Exception:
             raise Http404('No such company')
+    elif str(request.GET.get('type')) == 'category':
+        try:
+            data = get_object_or_404(Category,id = id)
+        except Exception:
+            raise Http404('No such category')
 
     if(request.method == "POST"):
         data.delete()
@@ -301,6 +341,8 @@ def DeleteObject(request,id):
         if str(request.GET.get('type')) == 'vacancy':
             context = {'title':data.name }
         elif str(request.GET.get('type')) == 'company':
+            context = {'title':data.name }
+        elif str(request.GET.get('type')) == 'category':
             context = {'title':data.name }
 
         return render(request,'api/delete.html',context)

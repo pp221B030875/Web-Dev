@@ -1,6 +1,11 @@
 from .models import *
 from django.forms import ModelForm
 
+class CategoryForm(ModelForm):
+    class Meta:
+        model = Category
+        fields = ('name',)
+
 class VacancyForm(ModelForm):
     class Meta:
         model = Vacancy
@@ -14,4 +19,4 @@ class CompanyForm(ModelForm):
 class CustomUserForm(ModelForm):
     class Meta:
         model = CustomUser
-        fields = ('username','email','password','user')
+        fields = ('username','email','password','country','user')

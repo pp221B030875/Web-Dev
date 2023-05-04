@@ -19,6 +19,8 @@ urlpatterns = [
     path('api/profile',views.UserView.as_view()),
     #Manager
     path('api/all-employees', views.ShowAllEmployees),
+    path('api/categories', views.AllCategoriesClass.as_view()),
+    path('api/categories/<int:id>', views.AllVacanciesClass.as_view()),
 
     path('api/create', views.CreateObject),
     path('api/update', views.UpdateObject),
