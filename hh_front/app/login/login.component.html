@@ -1,0 +1,24 @@
+<div class="header">
+  <img src="/assets/logo.jpg" id="logo">
+</div>
+
+<ng-container *ngIf="!logged">
+<div class="loginpanel">
+  <p>Log In to ur HustleUP account!</p>
+
+  <fieldset>
+    <input type="text" placeholder="username" [(ngModel)]="username">
+  </fieldset>
+  <fieldset>
+    <input type="text" placeholder="password" [(ngModel)]="password">
+  </fieldset>
+  <button (click)="login()">Log In</button>
+</div>
+</ng-container>
+
+<ng-container *ngIf="logged">
+<h1>Welcome!</h1>
+  <button (click)="logout()">Log out</button>
+</ng-container>
+
+

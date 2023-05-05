@@ -1,0 +1,18 @@
+*{
+  margin:0;/*overall margin of 0 for the document*/
+  padding:0;
+  box-sizing:border-box;/* . It guarantees that the content box
+     shrinks to make space for the padding
+
+     and borders. Therefore, if you set your
+      element width to 200 pixels, border-box
+      makes sure that the content, padding,
+      and borders fit in this number.*/
+  /*border:red solid 1px;*/
+  list-style-type: none;
+  font-family: 'Alegreya';
+
+}
+#logo{
+  width:170px;
+}

@@ -1,0 +1,137 @@
+*{
+  margin:0;/*overall margin of 0 for the document*/
+  padding:0;
+  box-sizing:border-box;/* . It guarantees that the content box
+     shrinks to make space for the padding
+
+     and borders. Therefore, if you set your
+      element width to 200 pixels, border-box
+      makes sure that the content, padding,
+      and borders fit in this number.*/
+  /*border:red solid 1px;*/
+  list-style-type: none;
+  font-family: 'Alegreya';
+
+}
+.wrapper{
+  display:flex;
+  flex-direction:column;
+  gap:100px;
+}
+
+.header{
+
+  font-size:20px;
+  background-color:#fff;
+  margin:0;/*overall margin of 0 for the document*/
+  padding:0;
+}
+.header1 ul{
+  display:flex;
+  flex-direction: row;
+  gap:40px;
+  align-items: center;
+}
+.header1 li:hover{
+  color:#013220;
+  font-weight-absolute:bolder;
+}
+.header2 ul{
+  display:flex;
+  flex-direction: row;
+  gap:40px;
+  align-items: center;
+  margin:20px;
+  margin-left:0px;
+}
+.header2 li:hover{
+  text-decoration:underline;
+}
+
+#line{
+  color:#fff;
+  height:1px;
+  width:100%;
+  background:#dedede;
+
+}
+
+
+button{
+  width:100%;
+  padding-top:5px;
+  padding-bottom:5px;
+  background-color:#013220;
+  color:#fff;
+  border-radius:10px;
+  border:none;
+  font-size:20px;
+}
+button3{
+  width:30%;
+
+}
+#buttonS{
+
+
+}
+#logo{
+  width:170px;
+}
+.middle{
+  display:flex;
+  flex-direction:column;
+  gap:30px;
+  margin:20px;
+  margin-left:0px;
+
+
+  /*border:blue solid 10px;*/
+}
+
+.middle ul{
+
+  flex-direction: column;
+  gap:35px;
+
+  /*border:yellowgreen solid 2px;*/
+}
+#inf1{
+  font-size:65px;
+
+}
+#inf2{
+  font-size:30px;
+  font-style:italic;
+
+}
+
+.footer{
+  display:flex;
+  flex-direction:row;
+  gap:30px;
+  font-size:20px;
+  align-items:center;
+
+}
+.footer left{
+  border: 2px solid #013220;
+  border-radius:5px;
+  background-color:darkslategrey;
+  font-palette: light;
+}
+.footer right{
+  border: 2px solid #013220;
+  border-radius:5px;
+  background-color:darkseagreen;
+  font-palette: dark;
+}
+.footer img{
+  width:90%;
+  align-items: center;
+  height:40vh;
+}
+.footer button:hover{
+  text-decoration:underline;
+}
+
