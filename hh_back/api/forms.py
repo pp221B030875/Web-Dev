@@ -9,7 +9,7 @@ class CategoryForm(ModelForm):
 class VacancyForm(ModelForm):
     class Meta:
         model = Vacancy
-        fields = ('name','description','salary','company')
+        fields = ('name','description','salary','company','category')
 
 class CompanyForm(ModelForm):
     class Meta:

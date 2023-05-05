@@ -71,7 +71,6 @@ def VacanciesByCategory(request,id):
 
 #Company views ==================================================================================
 class AllCompaniesClass(APIView):
-    permission_classes = IsAuthenticated
     def get(self,request):
         try:
             companies = Company.objects.all()
@@ -111,7 +110,7 @@ def CompanyDetail(request,id):
 @api_view(['GET'])
 def ShowTopTenVacancies(request):
     vacancies = Vacancy.objects.order_by('-salary')[:10]
-    serializer = CompanySerializer(vacancies, many=False)
+    serializer = VacancySerializer(vacancies, many=True)
     return Response(serializer.data)
 #Login/Registration ============================================================================
 
@@ -230,17 +229,17 @@ def CreateObject(request):
             form = VacancyForm(request.POST)
             if form.is_valid():
                 form.save()
-                return redirect('/api/vacancies')
+                return redirect('http://localhost:4200/api/vacancies')
         elif str(request.GET.get('type')) == 'company':
             form = CompanyForm(request.POST)
             if form.is_valid():
                 form.save()
-                return redirect('/api/companies')
+                return redirect('http://localhost:4200/api/companies')
         elif str(request.GET.get('type')) == 'category':
             form = CategoryForm(request.POST)
             if form.is_valid():
                 form.save()
-                return redirect('/api/categories')
+                return redirect('http://localhost:4200/api/categories')
     else:
         if (request.GET.get('type') == 'vacancy'):
             form = VacancyForm()
@@ -275,17 +274,17 @@ def UpdateObject(request,id):
             form = VacancyForm(request.POST,instance=old_data)
             if form.is_valid():
                 form.save()
-                return redirect(f'/api/vacancies/{id}')
+                return redirect(f'http://localhost:4200/api/vacancies')
         elif str(request.GET.get('type')) == 'company':
             form = CompanyForm(request.POST, instance=old_data)
             if form.is_valid():
                 form.save()
-                return redirect(f'/api/companies/{id}')
+                return redirect(f'http://localhost:4200/api/companies/{id}')
         elif str(request.GET.get('type')) == 'category':
             form = CategoryForm(request.POST, instance=old_data)
             if form.is_valid():
                 form.save()
-                return redirect(f'/api/categories/{id}')
+                return redirect(f'http://localhost:4200/api/categories/{id}')
 
     else:
         if str(request.GET.get('type')) == 'vacancy':
@@ -319,7 +318,13 @@ def DeleteObject(request,id):
 
     if(request.method == "POST"):
         data.delete()
-        return redirect('/api')
+        if str(request.GET.get('type')) == 'vacancy':
+            return redirect('http://localhost:4200/api/vacancies')
+        elif str(request.GET.get('type')) == 'company':
+            return redirect('http://localhost:4200/api/companies')
+        elif str(request.GET.get('type')) == 'category':
+            return redirect('http://localhost:4200/api/categories')
+
     else:
         if str(request.GET.get('type')) == 'vacancy':
             context = {'title':data.name }

@@ -25,6 +25,7 @@ class Company(models.Model):
         verbose_name = 'Company'
         verbose_name_plural = 'Companies'
 
+
 class Vacancy(models.Model):
     name = models.CharField('Name of vacancy',max_length=50)
     description = models.TextField('Description')
