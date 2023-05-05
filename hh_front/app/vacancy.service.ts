@@ -7,25 +7,25 @@ import {Vacancy} from "./models";
   providedIn: 'root'
 })
 export class VacancyService {
-  BASE_URL = 'http://127.0.0.1:8000'
+  BASE_URL = 'http://127.0.0.1:8001'
   constructor(private client: HttpClient) { }
 
   getVacancies(): Observable<Vacancy[]>{
-    return this.client.get<Vacancy[]>(`${this.BASE_URL}/api/vacancies`)
+    return this.client.get<Vacancy[]>(`${this.BASE_URL}/vacancies/`)
   }
   getVacancy(id: number): Observable<Vacancy>{
-    return this.client.get<Vacancy>(`${this.BASE_URL}/api/vacancies/${id}`)
+    return this.client.get<Vacancy>(`${this.BASE_URL}/vacancies/${id}`)
   }
   //top ten with the highest salary
   getTopVacancies(): Observable<Vacancy[]>{
-    return this.client.get<Vacancy[]>(`${this.BASE_URL}/api/vacancies/top_ten`)
+    return this.client.get<Vacancy[]>(`${this.BASE_URL}/vacancies/top_ten/`)
   }
   getTop15Vacancies():Observable<Vacancy[]>{
-    return this.client.get<Vacancy[]>(`${this.BASE_URL}/api/vacancies/top_fiveteen/`)
+    return this.client.get<Vacancy[]>(`${this.BASE_URL}/vacancies/top_fiveteen/`)
   }
   createVacancy(vacancyName: string): Observable<Vacancy> {
     return this.client.post<Vacancy>(
-      `${this.BASE_URL}/api/vacancies`,
+      `${this.BASE_URL}/api/vacancies/`,
       {'name': vacancyName}
     )
   }

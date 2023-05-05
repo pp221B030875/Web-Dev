@@ -11,12 +11,24 @@ class Category(models.Model):
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
 
+class CustomUser(AbstractUser):
+    class IntEnum(models.IntegerChoices):
+        employee = 0, 'Employee',
+        employer = 1, 'Employer',
+        manager = 2, 'Manager',
+
+    user_type = EnumField(IntEnum, default='2')
+    country = models.CharField('Country',max_length=50)
+    class Meta:
+        verbose_name = 'CustomUser'
+        verbose_name_plural = 'CustomUsers'
 
 class Company(models.Model):
     name = models.CharField('Name of company',max_length=50)
     description = models.TextField('Description')
     city = models.CharField('City',max_length=50)
     address = models.TextField('Address')
+    owner = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -38,16 +50,3 @@ class Vacancy(models.Model):
     class Meta:
         verbose_name = 'Vacancy'
         verbose_name_plural = 'Vacancies'
-
-
-class CustomUser(AbstractUser):
-    class IntEnum(models.IntegerChoices):
-        employee = 0, 'Employee',
-        employer = 1, 'Employer',
-        manager = 2, 'Manager',
-
-    user_type = EnumField(IntEnum, default='2')
-    country = models.CharField('Country',max_length=50)
-    class Meta:
-        verbose_name = 'CustomUser'
-        verbose_name_plural = 'CustomUsers'

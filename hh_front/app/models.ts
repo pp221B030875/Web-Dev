@@ -6,23 +6,17 @@ export interface Company{
   address: string;
 }
 export interface Category{
-  name: string;
+  
 }
 export interface Vacancy{
   id: number;
   name: string;
   description: string;
   salary: number;
-  company:number;
-  category:number;
+  company: Company;
+  count:number;
 }
 export interface AuthToken{
   token:string;
-}
-
-export interface CustomUser{
-  name:string;
-  user_type:string;
-  country:string;
 }
 

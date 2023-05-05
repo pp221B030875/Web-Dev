@@ -105,6 +105,16 @@ def CompanyDetail(request,id):
         response = 'Company was succesesfully deleted!'
         return Response(response)
 
+@api_view(['POST'])
+def UserCompany(request):
+    try:
+        user = CustomUser.objects.get(request.data['username'])
+        company = Company.objects.get(owner = user.id)
+    except Company.DoesNotExist:
+        raise Http404
+    serializer = CompanySerializer(company, many=False)
+    return Response(serializer.data)
+
 
 #Top 10 vacancies ================================================================================
 @api_view(['GET'])
@@ -175,12 +185,6 @@ class AllCategoriesClass(APIView):
             return Response(serializer.data)
         except Vacancy.DoesNotExist:
             raise Http404
-    def post(self,request):
-        serializer = CategorySerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=400)
 
 
 #CRUD
