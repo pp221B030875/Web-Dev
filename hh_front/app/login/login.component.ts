@@ -8,7 +8,7 @@ import {LoginService} from "../login.service";
 })
 export class LoginComponent implements OnInit{
   ngOnInit(){
-    const token=localStorage.getItem('token');
+    const token=localStorage.getItem('jwt');
     if(token){
       //if token exists in the local storage
       this.logged=true;
@@ -25,13 +25,18 @@ export class LoginComponent implements OnInit{
   login(){
     this.loginService.login(this.username,this.password).subscribe((data)=>{
       //console.log(data);
-      localStorage.setItem('token',data.token);
+      localStorage.setItem('jwt',data.token);
       this.logged=true;
-
+      this.loginService.getUserType(this.username).subscribe((data)=>{
+        localStorage.setItem('user_type',data.user_type);
+        localStorage.setItem('username',this.username);
+      });
     });
   }
   logout(){
-    localStorage.removeItem('token');
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('username');
+    localStorage.setItem('user_type','-1');
     //request to the django
     this.logged=false;
   }

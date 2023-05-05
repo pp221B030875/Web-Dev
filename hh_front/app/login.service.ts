@@ -1,15 +1,22 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {AuthToken, Company, Vacancy} from "./models";
+import {AuthToken, Company, Vacancy,CustomUser} from "./models";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  BASE_URL = 'http://127.0.0.1:8001'
+  BASE_URL = 'http://127.0.0.1:8000'
+  user_type:string = '-1';
   constructor(private client:HttpClient){
 
+  }
+  getUserType(username:string){
+    return this.client.post<CustomUser>(
+      `${this.BASE_URL}/api/get-user-type`,
+      {username:username}
+    )
   }
   login(username:string,password:string):Observable<AuthToken>{
     return this.client.post<AuthToken>(

@@ -20,3 +20,9 @@ export interface AuthToken{
   token:string;
 }
 
+export interface CustomUser{
+  name:string;
+  user_type:string;
+  country:string;
+}
+

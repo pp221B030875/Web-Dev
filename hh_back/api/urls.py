@@ -3,8 +3,9 @@ from . import views
 from rest_framework_jwt.views import obtain_jwt_token
 urlpatterns = [
     #Login/Registration
-    path('api/login' , views.loginPage, name='login'),
+    path('api/login' , obtain_jwt_token, name='login'),
     path('api/register' , views.Register.as_view(), name='register'),
+    path('api/get-user-type' , views.GetUserType),
 
     #Company views
     path('api/companies', views.AllCompaniesClass.as_view(), name='all-companies'),

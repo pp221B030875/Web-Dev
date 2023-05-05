@@ -122,61 +122,17 @@ class Register(APIView):
         return render(request, 'api/create.html', context)
 
     def post(self,request):
-        form = CustomUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('/api/login')
-
-        #rest framework
-        # serializer = CustomUserSerializer(data=request.data)
-        # serializer.is_valid(raise_exception=True)
-        # serializer.save()
-        # return Response(serializer.data)
-
-def loginPage(request):
-    permission_classes = (AllowAny,)
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect("/api/vacancies")
-    context = {}
-    return render(request, 'api/login.html', context)
-
-class Login(APIView):
-    permission_classes = (AllowAny,)
-    def post(self,request):
-        username = request.data['username']
-        password = request.data['password']
-
-        user = CustomUser.objects.filter(username = username).first()
-
-        if user is None:
-            raise AuthenticationFailed("User not found!")
-
-        if not user.check_password(password):
-            raise AuthenticationFailed("Incorrect password!")
-
-        payload = {
-            'id':user.id,
-            'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes= 60),
-            'iat': datetime.datetime.utcnow()
-        }
-
-        token = jwt.encode(payload=payload,key='secret', algorithm='HS256')
-
-        response = Response()
-
-        response.set_cookie(key='jwt',value=token,httponly=True)
-
-        #return to the home page
-        return redirect('/api/vacancies')
+        # form = CustomUserForm(request.POST)
+        # if form.is_valid():
+        #     form.save()
+        #     return Response("<h1>Successfully registration</h1>")
+        serializer = CustomUserSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return redirect("http://localhost:4200/api/login")
 
 #UserView
 class UserView(APIView):
-
     def get(self,request):
         #in localStorage put token
         auth = get_authorization_header(request).split()
@@ -198,11 +154,16 @@ class UserView(APIView):
             return Response(serializer.data)
         raise AuthenticationFailed('Unauthenticated! 3')
 
+@api_view(['POST'])
+def GetUserType(request):
+    user = CustomUser.objects.filter(username=request.data["username"]).first()
+    serializer = CustomUserSerializer(user, many=False)
+    return Response(serializer.data)
+
 #Manager
 @api_view(['GET'])
 def ShowAllEmployees(request):
-    columns = ["username","user"]
-    employees = CustomUser.objects.all().values(*columns)
+    employees = CustomUser.objects.filter(user=0)
     serializer = CustomUserSerializer(employees, many=True)
     return Response(serializer.data)
 

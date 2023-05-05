@@ -6,9 +6,11 @@
 </div>
 
 <h1>Company list</h1>
-<br>
-<h2><a href="http://127.0.0.1:8000/api/create?type=company">Create Company</a></h2>
-<br>
+<ng-container *ngIf="user_type=='2'">
+  <br>
+  <h2><a href="http://127.0.0.1:8000/api/create?type=company">Create Company</a></h2>
+  <br>
+</ng-container>
 <!--<fieldset>-->
 <!--  <input type="text" [(ngModel)]="newCompany">-->
 <!--  <button (click)="addCompany()">Add company</button>-->

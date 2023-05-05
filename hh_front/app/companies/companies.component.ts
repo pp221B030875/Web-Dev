@@ -11,8 +11,12 @@ import {Router} from "@angular/router";
 export class CompaniesComponent implements OnInit{
   companies: Company[] = [];
   newCompany:string="";
+  user_type:string='';
   constructor(private service: CompanyService,private router: Router){}
   ngOnInit(){
+    var type = localStorage.getItem('user_type');
+    if (type) this.user_type = type;
+    else if(type == '-1') this.user_type ='-1';
 
     this.service.getCompanies().subscribe((companies)=>{
       this.companies = companies

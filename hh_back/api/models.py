@@ -46,7 +46,7 @@ class CustomUser(AbstractUser):
         employer = 1, 'Employer',
         manager = 2, 'Manager',
 
-    user = EnumField(IntEnum, default='2')
+    user_type = EnumField(IntEnum, default='2')
     country = models.CharField('Country',max_length=50)
     class Meta:
         verbose_name = 'CustomUser'

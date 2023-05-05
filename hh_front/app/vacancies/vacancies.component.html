@@ -5,9 +5,11 @@
   <img src="/assets/logo.jpg" id="logo">
 </div>
 <h1>Vacancy list</h1>
-<br>
-<h2><a href="http://127.0.0.1:8000/api/create?type=vacancy">Create Vacancy</a></h2>
-<br>
+<ng-container *ngIf="user_type=='2'">
+  <br>
+  <h2><a href="http://127.0.0.1:8000/api/create?type=vacancy">Create Vacancy</a></h2>
+  <br>
+</ng-container>
 <!--<fieldset>-->
 <!--  <label>Vacancy name:</label>-->
 <!--  <input type="text" [(ngModel)]="newVacancy">-->
@@ -17,8 +19,10 @@
 <ul>
   <li *ngFor="let vacancy of vacancies">
     {{vacancy.id}} - {{vacancy.name}}
-    <a href="http://127.0.0.1:8000/api/update/{{vacancy.id}}?type=vacancy">Update</a> &nbsp;
-    <a href="http://127.0.0.1:8000/api/delete/{{vacancy.id}}?type=vacancy">X</a>
+    <ng-container *ngIf="user_type=='2'">
+      <a href="http://127.0.0.1:8000/api/update/{{vacancy.id}}?type=vacancy">Update</a> &nbsp;
+      <a href="http://127.0.0.1:8000/api/delete/{{vacancy.id}}?type=vacancy">X</a>
+    </ng-container>
   </li>
 </ul>
 

@@ -12,11 +12,18 @@ export class VacanciesComponent implements OnInit {
 
   ];
   newVacancy:string="";
+  user_type:string='';
+  owner:boolean=false;
 
   constructor(private service: VacancyService){
 
   }
   ngOnInit(): void{
+    var type = localStorage.getItem('user_type');
+    if (type) this.user_type = type;
+    else if(type == '-1') this.user_type ='-1';
+
+
     this.service.getVacancies().subscribe((vacancies)=>{
       this.vacancies = vacancies
       console.log(vacancies)

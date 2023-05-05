@@ -19,4 +19,4 @@ class CompanyForm(ModelForm):
 class CustomUserForm(ModelForm):
     class Meta:
         model = CustomUser
-        fields = ('username','email','password','country','user')
+        fields = ('username','email','password','country','user_type')
